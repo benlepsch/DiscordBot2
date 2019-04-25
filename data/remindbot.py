@@ -1,5 +1,11 @@
 import discord, asyncio, random, datetime
 
+def makeStr(array):
+    strr = ''
+    for item in array:
+        strr += item + ' '
+    return strr
+
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -36,7 +42,12 @@ class MyClient(discord.Client):
                 for i in range(0,5):
                     await message.channel.send(msg[1])
             if len(msg) > 2:
-                number = int(msg[len(msg)-1])
+                try:
+                    number = int(msg[len(msg)-1])
+                except:
+                    for i in range(0,5):
+                        await message.channel.send(makeStr(msg[1:]))
+                    return
                 msg.pop(len(msg)-1)
                 msg.pop(0)
                 pstr = ''

@@ -34,6 +34,9 @@ class MyClient(discord.Client):
             else:
                 await message.channel.send('no u suck')
 
+        if message.content.startswith('bot do u work'):
+            await message.channel.send('yes PogU')
+
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:
                 return
@@ -41,6 +44,9 @@ class MyClient(discord.Client):
             if len(msg) < 2:
                 await message.channel.send('you need to put a message to spam')
             if len(msg) == 2:
+                if msg[i] == '@everyone':
+                    await message.channel.send('no i\'m not pinging everyone')
+                    return
                 for i in range(0,5):
                     await message.channel.send(msg[1])
             if len(msg) > 2:

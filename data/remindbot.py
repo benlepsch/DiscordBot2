@@ -14,7 +14,7 @@ class MyClient(discord.Client):
 
     async def remind_allah(self):
         await self.wait_until_ready()
-        channel = self.get_channel(484652768464863233)
+        channel = self.get_channel(541442009957793814)
         while not self.is_closed():
             await channel.send('praise allah :hugging: :hugging:')
             await asyncio.sleep(43200)

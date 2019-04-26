@@ -38,12 +38,15 @@ class MyClient(discord.Client):
             else:
                 await message.channel.send('no u suck')
 
+        if message.content.startswith('..dm'):
+            await message.author.send('please?')
+
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')
 
         if message.content.startswith('..getip') and message.author.id == 262637906865291264:
             external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-            await message.channel.send('public ip: ' + external_ip)
+            await message.author.send('public ip: ' + external_ip)
 
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:

@@ -25,6 +25,9 @@ class MyClient(discord.Client):
         print(self.user.id)
         print('------------')
 
+        game = discord.Game('obliterating minorities')
+        await client.change_presence(status=discord.Status.idle, activity=game)
+
 
     async def on_message(self, message):
         if message.content.startswith('am i a coding god'):

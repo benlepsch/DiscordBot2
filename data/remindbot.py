@@ -56,12 +56,34 @@ class MyClient(discord.Client):
             # ..dmspam -u @user -m <message>
 
             if len(msg) < 2:
-                await message.channel.send('proper message formatting: `..dmspam -u @user -m <message>`')
+                await message.channel.send('proper message formatting: `..dmspam @user <message>`')
                 return
+            
+            if len(msg) == 2:
+                amount = 5
+            else:
+                amount = int(msg[2])
+            
             pguild = message.author.guild
-            to_ping = pguild.get_member(int(msg[0]))
+            
+            player_tag = list(msg[0])
+            fpt = ''
+            #print(player_tag)
+            for item in player_tag:
+                #print('inting ' + item)
+                try:
+                    #print(int(item))
+                    fpt += str(int(item))
+                except:
+                    fpt += ''
+            #print(fpt)
+            fpt = int(fpt)
+
+            to_ping = pguild.get_member(fpt)
             to_send = msg[1:]
-            await to_ping.send(to_send)
+
+            for i in range(amount):
+                await to_ping.send(to_send)
 
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:

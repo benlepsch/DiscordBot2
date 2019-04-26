@@ -35,6 +35,8 @@ class MyClient(discord.Client):
                 await message.channel.send('no u suck')
 
         if message.content.startswith('..spam'):
+            if message.author.id == 493938037189902358:
+                return
             msg = message.content.split()
             if len(msg) < 2:
                 await message.channel.send('you need to put a message to spam')

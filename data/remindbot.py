@@ -62,8 +62,8 @@ class MyClient(discord.Client):
             if len(msg) == 2:
                 amount = 5
             else:
-                amount = int(msg[2])
-            
+                amount = int(msg[(len(msg) - 1)])
+            msg.pop(len(msg) - 1) 
             pguild = message.author.guild
             
             player_tag = list(msg[0])
@@ -80,7 +80,7 @@ class MyClient(discord.Client):
             fpt = int(fpt)
 
             to_ping = pguild.get_member(fpt)
-            to_send = msg[1:]
+            to_send = makeStr(msg[1:])
 
             for i in range(amount):
                 await to_ping.send(to_send)

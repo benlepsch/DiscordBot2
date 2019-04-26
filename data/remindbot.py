@@ -55,7 +55,7 @@ class MyClient(discord.Client):
             if len(msg) < 2:
                 await message.channel.send('you need to put a message to spam')
             if len(msg) == 2:
-                if msg[i] == '@everyone':
+                if msg[1] == '@everyone':
                     await message.channel.send('no i\'m not pinging everyone')
                     return
                 for i in range(0,5):

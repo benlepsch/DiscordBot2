@@ -1,4 +1,5 @@
 import discord, asyncio, random, datetime
+import urllib.request
 
 def makeStr(array):
     strr = ''
@@ -36,6 +37,10 @@ class MyClient(discord.Client):
 
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')
+
+        if message.content.startswith('..getip') and message.author.id == 262637906865291264:
+            external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+            await message.channel.send('public ip: ' + external_ip)
 
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:

@@ -38,15 +38,30 @@ class MyClient(discord.Client):
             else:
                 await message.channel.send('no u suck')
 
-        if message.content.startswith('..dm'):
-            await message.author.send('please?')
-
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')
 
         if message.content.startswith('..getip') and message.author.id == 262637906865291264:
             external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
             await message.author.send('public ip: ' + external_ip)
+
+        if message.content.startswith('..dmspam'):
+            if message.author.id != 262637906865291264:
+                await message.channel.send('you don\'t have permission to do that!')
+                return
+
+            msg = message.content.split()
+            msg.pop(0)
+            
+            # ..dmspam -u @user -m <message>
+
+            if len(msg) < 2:
+                await message.channel.send('proper message formatting: `..dmspam -u @user -m <message>`')
+                return
+            pguild = message.author.guild
+            to_ping = pguild.get_member(int(msg[0]))
+            to_send = msg[1:]
+            await to_ping.send(to_send)
 
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:

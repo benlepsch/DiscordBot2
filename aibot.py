@@ -61,7 +61,10 @@ class MyClient(discord.Client):
         
         if do_i_get_word():
             msg = message.content.split()
-            word_to_get = msg[random.randint(0, (len(msg) - 1))]
+            if len(msg) > 1:
+                word_to_get = msg[random.randint(0, (len(msg) - 1))]
+            else:
+                return
             if is_it_a_word(word_to_get):
                 print('new word: ' + word_to_get)
                 add_word(word_to_get)

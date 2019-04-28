@@ -22,6 +22,18 @@ def say_something():
         msg += words[random.randint(0, len(words)-1)] + ' '
     return msg
 
+def is_it_a_word(word):
+    # this is supposed to filter out words that are @ing people or something
+    # so structured like <@43985623487> or something
+
+    word = list(word)
+
+    if word[0] == '<' and word[len(word) - 1] == '>':
+        # it's tagging someone
+        return False
+
+    return True
+
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -50,12 +62,15 @@ class MyClient(discord.Client):
         if do_i_get_word():
             msg = message.content.split()
             word_to_get = msg[random.randint(0, (len(msg) - 1))]
-            print('new word: ' + word_to_get)
-            add_word(word_to_get)
+            if is_it_a_word(word_to_get):
+                print('new word: ' + word_to_get)
+                add_word(word_to_get)
+            else:
+                print('it wasnt a word: ' + word_to_get)
         
         msg = message.content.split()
         if '<@493938037189902358>' in msg:
-            await message.channel.send(message.author.mention + ' '  + say_something())
+            await message.channel.send(message.author.mention + ' ' + say_something())
 
 AIClient = MyClient()
 AIClient.run('NDkzOTM4MDM3MTg5OTAyMzU4.DvcWkw.u8_xud6Esb6VQl3GCkkv5___MzM')

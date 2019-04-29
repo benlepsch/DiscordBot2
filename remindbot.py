@@ -1,8 +1,8 @@
 import discord, asyncio, random, datetime
 import urllib.request
 
-from token_folder import token, makeStr
-
+from token_folder import token
+from global_functions import makeStr
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

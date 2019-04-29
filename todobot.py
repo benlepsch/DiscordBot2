@@ -1,6 +1,7 @@
 import discord, asyncio
 
-from token_folder import token, makeStr
+from token_folder import token
+from global_functions import makeStr
 
 def get_todos(file='todos.txt'):
     todofile = open(file, 'r')

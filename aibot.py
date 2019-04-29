@@ -1,6 +1,7 @@
 import discord, asyncio, random
 
-from token_folder import token, makeStr
+from token_folder import token
+from global_functions import makeStr
 
 def do_i_get_word():
     if random.randint(0,5000) > 2500:

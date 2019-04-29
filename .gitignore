@@ -1,3 +1,2 @@
-bot.py
-spamcommands.py
-data/__pycache__/*
+token_folder/*
+__pycache__/*

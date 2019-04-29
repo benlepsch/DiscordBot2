@@ -1,6 +1,8 @@
 import discord, asyncio, random, datetime
 import urllib.request
 
+from token_folder import token
+
 def makeStr(array):
     strr = ''
     for item in array:
@@ -46,3 +48,4 @@ class MyClient(discord.Client):
             await message.author.send('public ip: ' + external_ip)
 
 client = MyClient()
+client.run(token)

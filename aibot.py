@@ -1,5 +1,7 @@
 import discord, asyncio, random
 
+from token_folder import token
+
 def do_i_get_word():
     if random.randint(0,5000) > 2500:
         return True
@@ -76,4 +78,4 @@ class MyClient(discord.Client):
             await message.channel.send(message.author.mention + ' ' + say_something())
 
 AIClient = MyClient()
-AIClient.run('NDkzOTM4MDM3MTg5OTAyMzU4.DvcWkw.u8_xud6Esb6VQl3GCkkv5___MzM')
+AIClient.run(token)

@@ -2,6 +2,12 @@ import discord, asyncio, random
 
 from token_folder import token
 
+def makeStr(array):
+    final = ''
+    for item in array:
+        final += item
+    return final
+
 def do_i_get_word():
     if random.randint(0,5000) > 2500:
         return True
@@ -30,8 +36,10 @@ def is_it_a_word(word):
 
     word = list(word)
 
-    if word[0] == '<' and word[len(word) - 1] == '>':
-        # it's tagging someone
+    if word[0] == '<' and word[len(word) - 1] == '>': # if it's tagging someone
+        return False
+
+    if makeStr(word[0:7]) == 'https://' or makeStr(word[0:6]) == 'http://': # if it's a link like https://youtu.be.something
         return False
 
     return True

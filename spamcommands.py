@@ -1,12 +1,6 @@
 import discord, asyncio
 
-from token_folder import token
-
-def makeStr(array):
-    strr = ''
-    for item in array:
-        strr += item + ' '
-    return strr
+from token_folder import token, makeStr
 
 class MyClient(discord.Client):
 

@@ -1,13 +1,7 @@
 import discord, asyncio, random, datetime
 import urllib.request
 
-from token_folder import token
-
-def makeStr(array):
-    strr = ''
-    for item in array:
-        strr += item + ' '
-    return strr
+from token_folder import token, makeStr
 
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):

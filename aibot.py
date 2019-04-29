@@ -1,12 +1,6 @@
 import discord, asyncio, random
 
-from token_folder import token
-
-def makeStr(array):
-    final = ''
-    for item in array:
-        final += item
-    return final
+from token_folder import token, makeStr
 
 def do_i_get_word():
     if random.randint(0,5000) > 2500:
@@ -40,6 +34,9 @@ def is_it_a_word(word):
         return False
 
     if makeStr(word[0:7]) == 'https://' or makeStr(word[0:6]) == 'http://': # if it's a link like https://youtu.be.something
+        return False
+
+    if len(word) > 199: # 199 characters is too long already but this ensures it'll never send something over the message limit
         return False
 
     return True

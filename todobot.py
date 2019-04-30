@@ -25,9 +25,8 @@ def add_todo(todo, file='todos.txt'):
 
 def del_todo(todo, file='todos.txt'):
     todofile = open(file, 'r')
-    todo = todo.split()[0]
-
-    current_todos = todofile.read().split()
+    
+    current_todos = todofile.read().split('\n')
     todofile.close()
 
     removed = False
@@ -62,14 +61,18 @@ class MyClient(discord.Client):
             await message.channel.send(add_todo(makeStr(message.content.split()[1:])))
 
         if message.content.startswith('..todos'):
-            await message.channel.send('todos: ``` {}```'.format(makeStr(get_todos(), '\n')))
+            if get_todos() == ['']:
+                print('no todos')
+                await message.channel.send('todos: ``` ```')
+            else:
+                await message.channel.send('todos: ```{}```'.format(makeStr(get_todos(), '\n')))
         
         if message.content.startswith('..deltodo'):
             await message.channel.send(del_todo(makeStr(message.content.split()[1:])))
         
         if message.content.startswith('..cleartodos'):
             todofile = open('todos.txt', 'w')
-            todofile.write('\n')
+            todofile.write('')
             todofile.close()
             await message.channel.send('cleared todos')
 

@@ -3,6 +3,12 @@ import urllib.request
 
 from token_folder import token
 from global_functions import makeStr
+
+import datetime
+
+remind_hour = 9
+last_day_reminded = 30
+
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -12,8 +18,9 @@ class MyClient(discord.Client):
         await self.wait_until_ready()
         channel = self.get_channel(541442009957793814)
         while not self.is_closed():
-            await channel.send('praise allah :hugging: :hugging:')
-            await asyncio.sleep(43200)
+            if datetime.datetime.now().time().hour == remind_hour and datetime.datetime.now().day != last_day_reminded:
+                await channel.send('praise allah :hugging: :hugging:')
+                last_day_reminded == datetime.datetime.now().day
 
     async def on_ready(self):
         print('logged in as')

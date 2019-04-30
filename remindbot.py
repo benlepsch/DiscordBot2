@@ -21,6 +21,8 @@ class MyClient(discord.Client):
             if datetime.datetime.now().time().hour == remind_hour and datetime.datetime.now().day != last_day_reminded:
                 await channel.send('praise allah :hugging: :hugging:')
                 last_day_reminded == datetime.datetime.now().day
+            else:
+                await asyncio.sleep(1)
 
     async def on_ready(self):
         print('logged in as')

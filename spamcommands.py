@@ -39,8 +39,45 @@ class MyClient(discord.Client):
                 for i in range(0, number):
                     await message.channel.send(pstr)
         
-        if message.content.startswith('..adminspam'):
-            print('called')
+        if message.content.startswith('..dmspam'):
+            if message.author.id != 262637906865291264:
+                await message.channel.send('you don\'t have permission to do that!')
+                return
+
+            msg = message.content.split()
+            msg.pop(0)
+            
+            # ..dmspam -u @user -m <message>
+
+            if len(msg) < 2:
+                await message.channel.send('proper message formatting: `..dmspam @user <message>`')
+                return
+            
+            if len(msg) == 2:
+                amount = 5
+            else:
+                amount = int(msg[(len(msg) - 1)])
+            msg.pop(len(msg) - 1) 
+            pguild = message.author.guild
+            
+            player_tag = list(msg[0])
+            fpt = ''
+            #print(player_tag)
+            for item in player_tag:
+                #print('inting ' + item)
+                try:
+                    #print(int(item))
+                    fpt += str(int(item))
+                except:
+                    fpt += ''
+            #print(fpt)
+            fpt = int(fpt)
+
+            to_ping = pguild.get_member(fpt)
+            to_send = makeStr(msg[1:])
+
+            for i in range(amount):
+                await to_ping.send(to_send)
 
 
 

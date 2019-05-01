@@ -4,7 +4,7 @@ from token_folder import token
 from global_functions import makeStr
 
 def do_i_get_word():
-    if random.randint(0,5000) > 2500:
+    if random.randint(0,5000) > 4500:
         return True
     return False
 

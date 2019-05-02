@@ -6,6 +6,8 @@ from global_functions import makeStr
 
 import datetime
 
+users_who_can_get_ip = [262637906865291264, 179741296464887808]
+
 remind_hour = 9
 last_day_reminded = 30
 
@@ -20,7 +22,7 @@ class MyClient(discord.Client):
         while not self.is_closed():
             if datetime.datetime.now().time().hour == remind_hour and datetime.datetime.now().day != last_day_reminded:
                 await channel.send('praise allah :hugging: :hugging:')
-                last_day_reminded == datetime.datetime.now().day
+                last_day_reminded = datetime.datetime.now().day
             else:
                 await asyncio.sleep(1)
 
@@ -46,7 +48,7 @@ class MyClient(discord.Client):
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')
 
-        if message.content.startswith('..getip') and message.author.id == 262637906865291264:
+        if message.content.startswith('..getip') and message.author.id in users_who_can_get_ip:
             external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
             await message.author.send('public ip: ' + external_ip)
 

@@ -9,3 +9,5 @@ def makeStr(array, separator=' '):
             final += item
     return final
 
+users_who_can_get_ip = [262637906865291264, 179741296464887808]
+

@@ -1,12 +1,9 @@
 import discord, asyncio, random, datetime
-import urllib.request
 
 from token_folder import token
-from global_functions import makeStr
 
 import datetime
 
-users_who_can_get_ip = [262637906865291264, 179741296464887808]
 
 remind_hour = 9
 last_day_reminded = 30
@@ -32,25 +29,6 @@ class MyClient(discord.Client):
         print(self.user.id)
         print('------------')
 
-        game = discord.Game('obliterating minorities')
-        await client.change_presence(status=discord.Status.idle, activity=game)
-
-
-    async def on_message(self, message):
-        if message.content.startswith('am i a coding god'):
-            if message.author.id == 262637906865291264:
-                print(message)
-                print(message.channel)
-                await message.channel.send('yes')
-            else:
-                await message.channel.send('no u suck')
-
-        if message.content.startswith('bot do u work'):
-            await message.channel.send('yes PogU')
-
-        if message.content.startswith('..getip') and message.author.id in users_who_can_get_ip:
-            external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-            await message.author.send('public ip: ' + external_ip)
 
 client = MyClient()
 client.run(token)

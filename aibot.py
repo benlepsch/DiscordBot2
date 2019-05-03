@@ -1,4 +1,4 @@
-import discord, asyncio, random
+import discord, asyncio, random, re
 
 from token_folder import token
 from global_functions import makeStr
@@ -79,8 +79,7 @@ class MyClient(discord.Client):
             else:
                 print('it wasnt a word: ' + word_to_get)
         
-        msg = message.content.split()
-        if '<@493938037189902358>' in msg:
+        if re.search('<@493938037189902358>', message.content):
             await message.channel.send(message.author.mention + ' ' + say_something())
 
 AIClient = MyClient()

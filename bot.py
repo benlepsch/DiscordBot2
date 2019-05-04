@@ -35,6 +35,7 @@ class MyClient(discord.Client):
         if message.content.startswith('..stopspam'):
             global spam_bot
             spam_bot.kill()
+            await message.channel.send('stopped spam bot, restarting now')
             spam_bot = subprocess.Popen(['python3', './spamcommands.py'])
 
 client = MyClient()

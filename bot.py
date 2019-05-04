@@ -1,8 +1,12 @@
+import subprocess
+
 import discord, asyncio
 import urllib.request
 
 from token_folder import token
-from global_functions import makeStr, users_who_can_get_ip
+from global_functions import owner, makeStr, users_who_can_get_ip
+
+spam_bot = subprocess.Popen(['python3','./spamcommands.py'])
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -16,7 +20,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         if message.content.startswith('am i a coding god'):
-            if message.author.id == 262637906865291264:
+            if message.author.id == owner:
                 await message.channel.send('yes')
             else:
                 await message.channel.send('no u suck')
@@ -27,6 +31,11 @@ class MyClient(discord.Client):
         if message.content.startswith('..getip') and message.author.id in users_who_can_get_ip:
             external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
             await message.author.send('public ip: ' + external_ip)
+
+        if message.content.startswith('..stopspam'):
+            global spam_bot
+            spam_bot.kill()
+            spam_bot = subprocess.Popen(['python3', './spamcommands.py'])
 
 client = MyClient()
 client.run(token)

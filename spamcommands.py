@@ -18,6 +18,9 @@ class MyClient(discord.Client):
             if message.author.id == minh_id:
                 await message.channel.send('no minh you dont get to spam')
                 return
+            if message.channel.name == 'general':
+                await message.channel.send('can\'t spam in general')
+                return
             msg = message.content.split()
             if len(msg) < 2:
                 await message.channel.send('you need to put a message to spam')

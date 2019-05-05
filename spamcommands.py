@@ -1,7 +1,7 @@
 import discord, asyncio
 
 from token_folder import token
-from global_functions import makeStr
+from global_functions import makeStr, minh_id
 
 class MyClient(discord.Client):
 
@@ -14,6 +14,9 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:
+                return
+            if message.author.id == minh_id:
+                await message.channel.send('no minh you dont get to spam')
                 return
             msg = message.content.split()
             if len(msg) < 2:

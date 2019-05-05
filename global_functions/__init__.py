@@ -12,3 +12,4 @@ def makeStr(array, separator=' '):
 users_who_can_get_ip = [262637906865291264, 179741296464887808]
 
 owner = 262637906865291264
+minh_id = 285546753057619978 

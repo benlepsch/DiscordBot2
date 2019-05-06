@@ -1,4 +1,4 @@
-import discord, asyncio
+import discord, asyncio, re
 
 from token_folder import token
 from global_functions import makeStr, minh_id
@@ -21,15 +21,13 @@ class MyClient(discord.Client):
             if message.channel.name == 'general':
                 await message.channel.send('can\'t spam in general')
                 return
+            if re.search('@everyone', message.content):
+                await message.channel.send('no pinging everyone')
+                return
+            
             msg = message.content.split()
             if len(msg) < 2:
                 await message.channel.send('you need to put a message to spam')
-            if len(msg) == 2:
-                if msg[1] == '@everyone':
-                    await message.channel.send('no i\'m not pinging everyone')
-                    return
-                for i in range(0,5):
-                    await message.channel.send(msg[1])
             if len(msg) > 2:
                 try:
                     number = int(msg[len(msg)-1])

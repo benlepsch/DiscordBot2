@@ -19,6 +19,8 @@ class MyClient(discord.Client):
         await client.change_presence(status=discord.Status.online, activity=game)
 
     async def on_message(self, message):
+        if message.author.id == self.user.id:
+            return
         if message.content.startswith('am i a coding god'):
             if message.author.id == owner:
                 await message.channel.send('yes')

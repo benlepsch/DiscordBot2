@@ -1,0 +1,3 @@
+
+rework aibot with first and last words and occasionally phrases
+rework todobot system so there are numbers

@@ -30,7 +30,7 @@ class MyClient(discord.Client):
         for word in message.content.split():
             if 'bruh' in word.lower():
                 await message.channel.send('bruh moment')
-
+                break
 
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')

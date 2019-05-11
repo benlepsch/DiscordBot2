@@ -18,8 +18,8 @@ class MyClient(discord.Client):
             if message.author.id == minh_id:
                 await message.channel.send('no minh you dont get to spam')
                 return
-            if message.channel.name == 'general':
-                await message.channel.send('can\'t spam in general')
+            if message.channel.name == 'general' or message.channel.name == 'building-projects':
+                await message.channel.send('can\'t spam in ' + message.channel.name)
                 return
             if re.search('@everyone', message.content):
                 await message.channel.send('no pinging everyone')

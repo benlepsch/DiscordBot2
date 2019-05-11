@@ -18,6 +18,10 @@ def add_word(word, file='words.txt'):
     with open(file, 'a') as word_file:
         word_file.write(' ' + word)
 
+def clear_file(file='words.txt'):
+    with open(file, 'w') as word_file:
+        word_file.write('bruh')
+
 def say_something():
     words = import_words()
     msg = ''
@@ -67,6 +71,9 @@ class MyClient(discord.Client):
         if message.author.id == self.user.id:
             return
         
+        if message.content.startswith('..clearfile'):
+            clear_file()
+            await message.channel.send('cleared word file')
         if do_i_get_word():
             msg = message.content.split()
             if len(msg) > 1:

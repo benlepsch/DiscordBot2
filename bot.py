@@ -28,9 +28,12 @@ class MyClient(discord.Client):
                 await message.channel.send('no u suck')
 
         for word in message.content.split():
+            if '~bruh' in word.lower():
+                await message.channel.send('b̶̧̙͔̪̩͙̖̩̺͔̣̭̈́̈́̌̅̀̉̑̾͑͆̕͠r̷̠̓ù̸̜̼̤̼͕̣̱̣̣̜̱͓̹̳̃̀̀̀̀͐̊̿̉̐̌͊͑͘ḣ̴̨̢͎̯̞̤̫͉͔̥͎̋͌͆͆̉̍̾͑̑͠͝ ̸̬̘͈̲͖̅̐̋̐̔̄͂̒̿͂͗͋̈́̿̕͜m̵̛̛̛̪̗͔̘̓͆̈̕o̷̢̖̝̬͉͌̋̊̋͐̄̍͘ͅm̸̨̩͍͇̮͇͙͙̥̥̈́͑̂̀͛͌̽̈̈́̎̏͠e̴͚̮̤̎̏̅̓͆̅̕n̴̛͇̟̦̳̤̥̜̮̮͆̒̀̎̀̈́̋̈́̃̿͋̚ͅt̷̛͍̲̼͆̅̃̏̍̑̀')
+                return
             if 'bruh' in word.lower():
                 await message.channel.send('bruh moment')
-                break
+                return
 
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')

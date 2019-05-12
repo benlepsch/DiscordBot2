@@ -73,6 +73,7 @@ class MyClient(discord.Client):
         
         if message.content.startswith('..clearfile'):
             clear_file()
+            print('cleared word file')
             await message.channel.send('cleared word file')
         if do_i_get_word():
             msg = message.content.split()

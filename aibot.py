@@ -75,6 +75,12 @@ class MyClient(discord.Client):
             clear_file()
             print('cleared word file')
             await message.channel.send('cleared word file')
+
+        if message.content.startswith('..words'):
+            with open('words.txt','r') as word_file:
+                words = word_file.read()
+                await message.channel.send('words in file: ```' + words + '```')
+
         if do_i_get_word():
             msg = message.content.split()
             if len(msg) > 1:

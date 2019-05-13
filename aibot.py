@@ -81,6 +81,27 @@ class MyClient(discord.Client):
                 words = word_file.read()
                 await message.channel.send('words in file: ```' + words + '```')
 
+        if message.content.startswith('..delword'):
+            words = []
+            with open('words.txt','r') as word_file:
+                words = word_file.read().split()
+                print('words: ')
+                print(words)
+            to_delete = message.content.split()[1]
+            print('deleting ' + to_delete)
+            deleted = False
+            while not deleted:
+                if to_delete in words:
+                    print('in words')
+                    words.remove(to_delete)
+                else:
+                    break
+
+            with open('words.txt','w') as word_file:
+                word_file.write(makeStr(words))
+
+            await message.channel.send('deleted word ' + to_delete)
+
         if do_i_get_word():
             msg = message.content.split()
             if len(msg) > 1:

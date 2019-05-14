@@ -108,16 +108,21 @@ class MyClient(discord.Client):
                 words = word_file.read().split()
             to_delete = message.content.split()[1]
             deleted = False
+            found = False
             while not deleted:
                 if to_delete in words:
                     words.remove(to_delete)
+                    found = True
                 else:
                     break
 
             with open('words.txt','w') as word_file:
                 word_file.write(makeStr(words))
-
-            await message.channel.send('deleted word ' + to_delete)
+            
+            if found:
+                await message.channel.send('deleted word ' + to_delete)
+            else:
+                await message.channel.send(to_delete + ' wasnt in the word file')
 
         if do_i_get_word():
             msg = message.content.split()

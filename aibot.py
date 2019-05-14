@@ -16,7 +16,7 @@ def import_words(file='words.txt'):
 
 def add_word(word, file='words.txt'):
     with open(file, 'a') as word_file:
-        word_file.write(' ' + word)
+        word_file.write(' ' + makeWord(word))
 
 def clear_file(file='words.txt'):
     with open(file, 'w') as word_file:
@@ -29,11 +29,32 @@ def say_something():
         msg += words[random.randint(0, len(words)-1)] + ' '
     return msg
 
+def makeWord(word):
+    # word has special characters/maybe capitals
+    # this removes them so it looks uniform
+
+    word = list(word)
+    for char in word:
+        if lower(char) == char and upper(char) == char:
+            word.remove(char)
+
+    return lower(word)
+
 def is_it_a_word(word):
     # this is supposed to filter out words that are @ing people or something
     # so structured like <@43985623487> or something
 
     word = list(word)
+
+    hasLetter = False
+    for char in word:
+        if lower(char) == char and upper(char) == char: # a == a and A == a, this is only true for non-letter chars like , . ! etc
+            word.remove(char)
+        else: # it is a letter
+            hasLetter = True
+
+    if not hasLetter:
+        return False
 
     if word[0] == '<' and word[len(word) - 1] == '>': # if it's tagging someone
         return False
@@ -85,14 +106,10 @@ class MyClient(discord.Client):
             words = []
             with open('words.txt','r') as word_file:
                 words = word_file.read().split()
-                print('words: ')
-                print(words)
             to_delete = message.content.split()[1]
-            print('deleting ' + to_delete)
             deleted = False
             while not deleted:
                 if to_delete in words:
-                    print('in words')
                     words.remove(to_delete)
                 else:
                     break

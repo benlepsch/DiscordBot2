@@ -48,7 +48,7 @@ def is_it_a_word(word):
 
     hasLetter = False
     for char in word:
-        if lower(char) == char and upper(char) == char: # a == a and A == a, this is only true for non-letter chars like , . ! etc
+        if char.lower() == char and char.upper() == char: # a == a and A == a, this is only true for non-letter chars like , . ! etc
             word.remove(char)
         else: # it is a letter
             hasLetter = True

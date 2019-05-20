@@ -97,6 +97,12 @@ class MyClient(discord.Client):
             print('cleared word file')
             await message.channel.send('cleared word file')
 
+        if message.content.startswith('..addword'):
+            with open('words.txt','a') as word_file:
+                word = ' '.join(message.content.split()[1:])
+                word_file.write(' ' + word)
+            await message.channel.send('added word `' + word + '` to file')
+
         if message.content.startswith('..words'):
             with open('words.txt','r') as word_file:
                 words = word_file.read()

@@ -44,7 +44,7 @@ class MyClient(discord.Client):
                     await message.channel.send(pstr)
         
         if message.content.startswith('..dmspam'):
-            if message.author.id != 262637906865291264:
+            if message.author.id != 262637906865291264 or message.author.id != 178876334095859712:
                 await message.channel.send('you don\'t have permission to do that!')
                 return
 

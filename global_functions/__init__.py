@@ -1,3 +1,5 @@
+banned_channels = ['general']
+
 def makeStr(array, separator=' '):
     # makes an array into a string
     final = ''

@@ -1,7 +1,7 @@
 import discord, asyncio, re
 
 from token_folder import token
-from global_functions import makeStr, minh_id
+from global_functions import banned_channels, owner, makeStr, minh_id
 
 class MyClient(discord.Client):
 
@@ -12,14 +12,32 @@ class MyClient(discord.Client):
         print('------------')
 
     async def on_message(self, message):
+        if message.content.startswith('..banned'):
+            await message.channel.send('channels banned: ' + ' '.join(banned_channels))
+            return
+
+        if message.content.startswith('..ban'):
+            if not message.content.split()[1] in banned_channels:
+              banned_channels.append(message.content.split()[1])
+              await message.channel.send('added channel **{}** to ban list'.format(message.content.split()[1]))
+            else:
+                await message.channel.send('channel **{}** already banned'.format(message.content.split()[1]))
+        
+        if message.content.startswith('..unban'):
+            if not message.content.split()[1] in banned_channels:
+                await message.channel.send('channel **{}** not banned'.format(message.content.split()[1]))
+            else:
+                banned_channels.remove(message.content.split()[1])
+                await message.channel.send('channel **{}** unbanned'.format(message.content.split()[1]))
+
+        if message.channel.name in banned_channels:
+            return
+
         if message.content.startswith('..spam'):
             if message.author.id == 493938037189902358:
                 return
             if message.author.id == minh_id:
                 await message.channel.send('no minh you dont get to spam')
-                return
-            if message.channel.name == 'general' or message.channel.name == 'building-projects':
-                await message.channel.send('can\'t spam in ' + message.channel.name)
                 return
             if re.search('@everyone', message.content):
                 await message.channel.send('no pinging everyone')
@@ -44,7 +62,7 @@ class MyClient(discord.Client):
                     await message.channel.send(pstr)
         
         if message.content.startswith('..dmspam'):
-            if message.author.id != 262637906865291264 or message.author.id != 178876334095859712:
+            if message.author.id != owner:    
                 await message.channel.send('you don\'t have permission to do that!')
                 return
 

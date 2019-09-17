@@ -2,6 +2,7 @@ import discord, asyncio, random
 from token_folder import token
 from PyDictionary import PyDictionary
 
+banned_channels = ['general']
 dictionary = PyDictionary()
 
 class MyClient(discord.Client):
@@ -15,7 +16,20 @@ class MyClient(discord.Client):
         if message.author.id == self.user.id:
             return
         
-        if (random.randint(0,5) == 4):
+        if message.content.startswith('..ban'):
+            if message.content.split()[1] in banned_channels:
+                return
+            banned_channels.append(message.content.split()[1])
+
+        if message.content.startswith('..unban'):
+            if not message.content.split()[1] in banned_channels:
+                return
+            banned_channels.remove(message.content.split()[1])
+
+        if message.channel.name in banned_channels:
+            return
+
+        if (random.randint(0,3) == 2):
             msg = message.content.split()
             todefine = msg[random.randint(0, len(msg) - 1)]
             try:

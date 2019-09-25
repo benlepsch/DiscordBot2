@@ -34,6 +34,12 @@ class MyClient(discord.Client):
             if 'bruh' in word.lower():
                 await message.channel.send('bruh moment')
                 return
+            if 'sohn' in word.lower():
+                await message.channel.send('<:sohn1:625139707453505561><:sohn2:625139706950189088>\n<:sohn3:625139707432402974><:sohn4:625139707533328414>')
+                return
+            if 'nhos' in word.lower():
+                await message.channel.send('<:sohn3:625139707432402974><:sohn4:625139707533328414>\n<:sohn1:625139707453505561><:sohn2:625139706950189088>')
+                return
 
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')

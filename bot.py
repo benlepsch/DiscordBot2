@@ -4,7 +4,7 @@ import discord, asyncio
 import urllib.request
 
 from token_folder import token
-from global_functions import owner, makeStr, users_who_can_get_ip
+from global_functions import owner, makeStr, users_who_can_get_ip, get_sohn_config, is_sohn_in_word
 
 spam_bot = subprocess.Popen(['python3','./spamcommands.py'])
 
@@ -28,18 +28,15 @@ class MyClient(discord.Client):
                 await message.channel.send('no u suck')
 
         for word in message.content.split():
+            if is_sohn_in_word(word.lower()):
+                await message.channel.send(get_sohn_config(word.lower()))
             if '~bruh' in word.lower():
                 await message.channel.send('b̶̧̙͔̪̩͙̖̩̺͔̣̭̈́̈́̌̅̀̉̑̾͑͆̕͠r̷̠̓ù̸̜̼̤̼͕̣̱̣̣̜̱͓̹̳̃̀̀̀̀͐̊̿̉̐̌͊͑͘ḣ̴̨̢͎̯̞̤̫͉͔̥͎̋͌͆͆̉̍̾͑̑͠͝ ̸̬̘͈̲͖̅̐̋̐̔̄͂̒̿͂͗͋̈́̿̕͜m̵̛̛̛̪̗͔̘̓͆̈̕o̷̢̖̝̬͉͌̋̊̋͐̄̍͘ͅm̸̨̩͍͇̮͇͙͙̥̥̈́͑̂̀͛͌̽̈̈́̎̏͠e̴͚̮̤̎̏̅̓͆̅̕n̴̛͇̟̦̳̤̥̜̮̮͆̒̀̎̀̈́̋̈́̃̿͋̚ͅt̷̛͍̲̼͆̅̃̏̍̑̀')
                 return
             if 'bruh' in word.lower():
                 await message.channel.send('bruh moment')
                 return
-            if 'sohn' in word.lower():
-                await message.channel.send('<:sohn1:625139707453505561><:sohn2:625139706950189088>\n<:sohn3:625139707432402974><:sohn4:625139707533328414>')
-                return
-            if 'nhos' in word.lower():
-                await message.channel.send('<:sohn3:625139707432402974><:sohn4:625139707533328414>\n<:sohn1:625139707453505561><:sohn2:625139706950189088>')
-                return
+            
 
         if message.content.startswith('bot do u work'):
             await message.channel.send('yes PogU')

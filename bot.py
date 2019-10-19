@@ -26,12 +26,21 @@ class MyClient(discord.Client):
                 await message.channel.send('yes')
             else:
                 await message.channel.send('no u suck')
+        
+        sending = ''
+        for word in message.content.split():
+            sohning = False
+            if is_sohn_in_word(word.lower()) != False:
+                sending += is_sohn_in_word(word.lower())
+                sending += '\n'
+                sohning = True
+                continue
+        
+        if sohning:
+            await message.channel.send(sending)
 
         for word in message.content.split():
-            if is_sohn_in_word(word.lower()) != False:
-                await message.channel.send(is_sohn_in_word(word.lower()))
-                return
-            if re.search('so', word.lower()):
+            if re.search('so', word.lower()) and is_sohn_in_word(word.lower()) == False:
                 await message.channel.send(sohn_top())
                 return
             if '~bruh' in word.lower():

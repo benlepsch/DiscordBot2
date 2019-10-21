@@ -30,11 +30,10 @@ class MyClient(discord.Client):
         sending = ''
         for word in message.content.split():
             sohning = False
-            if is_sohn_in_word(word.lower()) != False:
+            if is_sohn_in_word(word.lower()) != 'not sohn':
                 sending += is_sohn_in_word(word.lower())
                 sending += '\n'
                 sohning = True
-                continue
         
         if sohning:
             await message.channel.send(sending)

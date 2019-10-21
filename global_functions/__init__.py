@@ -17,7 +17,7 @@ def is_sohn_in_word(word):
                     issohn = False
             if issohn:
                 return sohn[word[i]] + sohn[word[i + 1]] + '\n' + sohn[word[i + 2]] + sohn[word[i + 3]]
-
+    return 'not sohn'
 
 
 

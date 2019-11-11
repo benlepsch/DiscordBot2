@@ -1,3 +1,4 @@
 token_folder/*
 __pycache__/*
+start_mc_server/*
 global_functions/__pycache__/*

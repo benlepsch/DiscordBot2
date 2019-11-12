@@ -26,7 +26,8 @@ class MyClient(discord.Client):
                 await message.channel.send('yes')
             else:
                 await message.channel.send('no u suck')
-        
+        if message.content.startswith('..clear'):
+            await message.channel.send('** **\n'*22)
         sohning = False
         sending = ''
         for word in message.content.split():

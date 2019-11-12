@@ -48,9 +48,12 @@ class MyClient(discord.Client):
             
             for channel in channels:
                 print('trying channel ' + str(channel))
+                if channel in banned_channels:
+                    print('channel is banned, skipping')
+                    continue
                 try:
                     for i in range(times):
-                        await channel.send(''.join(message.content.split()[1:-1]))
+                        await channel.send(' '.join(message.content.split()[1:-1]))
                 except:
                     print('failed')
             print('done')

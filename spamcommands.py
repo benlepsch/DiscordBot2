@@ -12,6 +12,9 @@ class MyClient(discord.Client):
         print('------------')
 
     async def on_message(self, message):
+        if message.author.id == self.user.id:
+            return
+
         if message.content.startswith('..banned'):
             await message.channel.send('channels banned: ' + ' '.join(banned_channels))
             return
@@ -31,6 +34,29 @@ class MyClient(discord.Client):
                 await message.channel.send('channel **{}** unbanned'.format(message.content.split()[1]))
 
         if message.channel.name in banned_channels:
+            return
+
+        if message.content.startswith('..spamall'):
+            channels = message.guild.channels
+            print(channels)
+
+            try:
+                times = int(message.content.split()[len(message.content.split) - 1])
+            except:
+                times = 5
+            print(times)
+            
+            for channel in channels:
+                print('trying channel ' + str(channel))
+                if channel in banned_channels:
+                    print('channel is banned, skipping')
+                    continue
+                try:
+                    for i in range(times):
+                        await channel.send(' '.join(message.content.split()[1:-1]))
+                except:
+                    print('failed')
+            print('done')
             return
 
         if message.content.startswith('..spam'):

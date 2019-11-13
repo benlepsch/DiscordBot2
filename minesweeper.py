@@ -88,8 +88,9 @@ class Minesweeper():
         self.width = int(msg[1])
         self.bombs = int(msg[2])
         self.firstMove = msg[3]
+        self.flagsLeft = self.bombs
         self.generateGrid(self.convertMove(msg[3]))
-        self.nicePrint(self.numbersGrid)
+        #self.nicePrint(self.numbersGrid)
         #return(self.showGrid())
         # TODO: handle first move here since its different than the rest
 
@@ -111,6 +112,7 @@ class Minesweeper():
             self.height = 0
             self.width = 0
             self.bombs = 0
+            self.flagsLeft = 0
             self.running = False
             return 'You lose! haha get fucked'
         
@@ -153,6 +155,7 @@ class Minesweeper():
         # unflag
         if self.grid[i][j] == 'CF' or self.grid[i][j] == 'IF':
             self.grid[i][j] = 'US'
+            self.flagsLeft += 1
             return self.showGrid()
         
         # not unbroken
@@ -161,13 +164,15 @@ class Minesweeper():
         
         if self.numbersGrid[i][j] == 'B':
             self.grid[i][j] = 'CF'
+            self.flagsLeft -= 1
             return self.showGrid()
         
         self.grid[i][j] = 'IF'
+        self.flagsLeft -= 1
         return self.showGrid()
 
     def showGrid(self):
-        out = ''
+        out = 'Flags left: ' + str(self.flagsLeft) + '\n'
         for i in range(len(self.grid)):
             out += str(i+1) + ' '*(3-len(str(i+1))) # 2 spaces for single digit numbers, 1 for two digit numbers
             for j in range(len(self.grid[0])):
@@ -196,6 +201,9 @@ class Minesweeper():
                 out += str(arr[i][j]) + ' '
             out += '\n'
         print(out)
+
+    #def checkWin(self):
+
 
 ms = Minesweeper()
 

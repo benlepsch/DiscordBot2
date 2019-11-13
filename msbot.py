@@ -1,5 +1,6 @@
 import discord, asyncio
 from minesweeper import Minesweeper
+from token_folder import token
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -14,10 +15,13 @@ class MyClient(discord.Client):
             return
         
         if message.content.startswith('..startgame'):
-            return(self.ms.startGame(''.join(message.content.split()[1:])))
+            return(self.ms.startGame(' '.join(message.content.split()[1:])))
         
         if message.content.startswith('..break'):
             self.ms.clear(message.content.split()[1])
         
         if message.content.startswith('..flag'):
             self.ms.flag(message.content.split()[1])
+
+client = MyClient()
+client.run(token)

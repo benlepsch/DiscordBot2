@@ -120,7 +120,9 @@ class Minesweeper():
         if self.numbersGrid[move[0]][move[1]] == 0:
             # clear everything around it then do again for any zeros uncovered
             # i should probably write a function since this needs to be recursive
-            self.clearZero(move)
+            self.toClear = [[move[0], move[1]]]
+            for mv in self.toClear:
+                self.clearZero(mv)
 
     def clearZero(self, move):
         for i in range(move[0]-1, move[0]+2):
@@ -130,9 +132,15 @@ class Minesweeper():
                 if j < 0:
                     continue
                 try:
-                    self.displayGrid[i][j] = True
+                    #self.displayGrid[i][j] = True
+                    #if self.numbersGrid[i][j] == 0 and not self.displayGrid[i][j]:
+                    #    self.clearZero([i,j])
                     if self.numbersGrid[i][j] == 0 and not self.displayGrid[i][j]:
-                        self.clearZero([i,j])
+                        self.toClear.append([i,j])
+                    
+                    if not self.displayGrid[i][j]:
+                        self.displayGrid[i][j] = True
+                    
                 except IndexError:
                     continue
     

@@ -87,7 +87,7 @@ class Minesweeper():
         self.height = int(msg[0])
         self.width = int(msg[1])
         self.bombs = int(msg[2])
-
+        self.firstMove = msg[3]
         self.generateGrid(self.convertMove(msg[3]))
         self.nicePrint(self.numbersGrid)
         #return(self.showGrid())
@@ -179,8 +179,15 @@ class Minesweeper():
         print(out)
 
 ms = Minesweeper()
-ms.startGame('10 10 15 5D')
-print(ms.showGrid() + '\n')
-ms.clear('5D')
-print(ms.showGrid())
+#ms.startGame('10 10 15 5D')
+#print(ms.showGrid() + '\n')
+#ms.clear('5D')
+#print(ms.showGrid())
 #print(ms.nicePrint(ms.displayGrid))
+
+ms.startGame(input('Enter height, width, bombs, and first move separated by spaces: '))
+ms.clear(ms.firstMove)
+print(ms.showGrid())
+
+running = True
+#while running:

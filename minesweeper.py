@@ -105,19 +105,15 @@ class Minesweeper():
             return 'That space is already clicked'
         
         if self.numbersGrid[move[0]][move[1]] == 'B':
-            self.grid = [] 
-            self.numbersGrid = [] 
-            self.originalGrid = [] 
-            self.displayGrid = [] 
-            self.height = 0
-            self.width = 0
-            self.bombs = 0
-            self.flagsLeft = 0
-            self.running = False
+            self.reset()
             return 'You lose! haha get fucked'
         
         if self.numbersGrid[move[0]][move[1]] != 0:
             self.displayGrid[move[0]][move[1]] = True
+            if self.checkWinClick():
+                st = self.showGrid() + '\nYou Won!'
+                self.reset()
+                return st
             return self.showGrid()
         
         if self.numbersGrid[move[0]][move[1]] == 0:
@@ -165,6 +161,10 @@ class Minesweeper():
         if self.numbersGrid[i][j] == 'B':
             self.grid[i][j] = 'CF'
             self.flagsLeft -= 1
+            if self.checkWinFlag():
+                st = self.showGrid() + '\nYou Won!'
+                self.reset()
+                return st
             return self.showGrid()
         
         self.grid[i][j] = 'IF'
@@ -202,8 +202,34 @@ class Minesweeper():
             out += '\n'
         print(out)
 
-    #def checkWin(self):
+    # two ways to win: flagging all the bombs or clicking everything except the bombs
+    def checkWinFlag(self):
+        if self.flagsLeft != 0:
+            return False
+        for i in self.grid:
+            for j in i:
+                if j == 'IF':
+                    return False
+        
+        return True
+    
+    def checkWinClick(self):
+        for i in range(len(self.displayGrid)):
+            for j in range(len(self.displayGrid[0])):
+                if not self.displayGrid[i][j] and self.numbersGrid[i][j] != 'B':
+                    return False
+        return True
 
+    def reset(self):
+        self.grid = [] 
+        self.numbersGrid = [] 
+        self.originalGrid = [] 
+        self.displayGrid = [] 
+        self.height = 0
+        self.width = 0
+        self.bombs = 0
+        self.flagsLeft = 0
+        self.running = False
 
 ms = Minesweeper()
 

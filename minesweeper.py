@@ -149,16 +149,33 @@ class Minesweeper():
     def flag(self, msg):
         # msg should be like "4A" or something, after conversion 4A -> [3,0]
         msg = self.convertMove(msg)
+        i, j = msg
+        # unflag
+        if self.grid[i][j] == 'CF' or self.grid[i][j] == 'IF':
+            self.grid[i][j] = 'US'
+            return self.showGrid()
+        
+        # not unbroken
+        if self.displayGrid[i][j]:
+            return 'you can\'t flag that you imbecile'
+        
+        if self.numbersGrid[i][j] == 'B':
+            self.grid[i][j] = 'CF'
+            return self.showGrid()
+        
+        self.grid[i][j] = 'IF'
+        return self.showGrid()
 
     def showGrid(self):
         out = ''
         for i in range(len(self.grid)):
             out += str(i+1) + ' '*(3-len(str(i+1))) # 2 spaces for single digit numbers, 1 for two digit numbers
             for j in range(len(self.grid[0])):
+                if self.grid[i][j] == 'CF' or self.grid[i][j] == 'IF':
+                    out += 'F '
+                    continue
                 if self.displayGrid[i][j]:
-                    if self.grid[i][j] == 'CF' or self.grid[i][j] == 'IF':
-                        out += 'F '
-                    elif self.originalGrid[i][j] == 0:
+                    if self.originalGrid[i][j] == 0:
                         out += (str(self.numbersGrid[i][j]) + ' ' if self.numbersGrid[i][j] != 0 else '- ')
                     elif self.grid[i][j] == 'US':
                         out += 'O '
@@ -189,9 +206,18 @@ print(ms.showGrid())
 running = True
 while running:
     inpuT = input('Break/Flag + Location: ')
+
+    if len(inpuT.split(' ')) < 2:
+        print('make sure you include the location in there too')
+        continue
+
     if inpuT.split(' ')[0].lower() == 'break':
         print(ms.clear(inpuT.split(' ')[1]))
-    
+    elif inpuT.split(' ')[0].lower() == 'flag':
+        print(ms.flag(inpuT.split(' ')[1]))
+    else:
+        print('I didnt recognize that option, try typing break or flag')
+
     if not ms.running:
         running = False
         break

@@ -116,6 +116,7 @@ class Minesweeper():
         
         if self.numbersGrid[move[0]][move[1]] != 0:
             self.displayGrid[move[0]][move[1]] = True
+            return self.showGrid()
         
         if self.numbersGrid[move[0]][move[1]] == 0:
             # clear everything around it then do again for any zeros uncovered
@@ -123,6 +124,7 @@ class Minesweeper():
             self.toClear = [[move[0], move[1]]]
             for mv in self.toClear:
                 self.clearZero(mv)
+            return self.showGrid()
 
     def clearZero(self, move):
         for i in range(move[0]-1, move[0]+2):
@@ -179,15 +181,17 @@ class Minesweeper():
         print(out)
 
 ms = Minesweeper()
-#ms.startGame('10 10 15 5D')
-#print(ms.showGrid() + '\n')
-#ms.clear('5D')
-#print(ms.showGrid())
-#print(ms.nicePrint(ms.displayGrid))
 
 ms.startGame(input('Enter height, width, bombs, and first move separated by spaces: '))
 ms.clear(ms.firstMove)
 print(ms.showGrid())
 
 running = True
-#while running:
+while running:
+    inpuT = input('Break/Flag + Location: ')
+    if inpuT.split(' ')[0].lower() == 'break':
+        print(ms.clear(inpuT.split(' ')[1]))
+    
+    if not ms.running:
+        running = False
+        break

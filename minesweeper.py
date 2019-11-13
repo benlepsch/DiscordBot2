@@ -172,7 +172,7 @@ class Minesweeper():
         return self.showGrid()
 
     def showGrid(self):
-        out = 'Flags left: ' + str(self.flagsLeft) + '\n'
+        out = '```Flags left: ' + str(self.flagsLeft) + '\n'
         for i in range(len(self.grid)):
             out += str(i+1) + ' '*(3-len(str(i+1))) # 2 spaces for single digit numbers, 1 for two digit numbers
             for j in range(len(self.grid[0])):
@@ -191,6 +191,7 @@ class Minesweeper():
         out += '   '
         for i in range(len(self.grid[0])):
             out += chr(i + 65) + ' '
+        out += '```'
         
         return out
     

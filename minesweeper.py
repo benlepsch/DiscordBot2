@@ -231,6 +231,8 @@ class Minesweeper():
         self.flagsLeft = 0
         self.running = False
 
+
+""" # Uncomment these lines for CLI minesweeper, comment them again if running thru discord bot
 ms = Minesweeper()
 
 ms.startGame(input('Enter height, width, bombs, and first move separated by spaces: '))
@@ -255,3 +257,4 @@ while running:
     if not ms.running:
         running = False
         break
+"""

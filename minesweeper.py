@@ -183,9 +183,9 @@ class Minesweeper():
                     if self.originalGrid[i][j] == 0:
                         out += (str(self.numbersGrid[i][j]) + ' ' if self.numbersGrid[i][j] != 0 else '- ')
                     elif self.grid[i][j] == 'US':
-                        out += 'O '
+                        out += '❏ '
                 else:
-                    out += 'O '
+                    out += '❏ '
             out += '\n'
         
         out += '   '

@@ -37,6 +37,8 @@ class MyClient(discord.Client):
             return
 
         if message.content.startswith('..spamall'):
+            await message.channel.send('fuck no')
+            return
             channels = message.guild.channels
             print(channels)
 

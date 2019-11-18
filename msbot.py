@@ -18,6 +18,7 @@ class MyClient(discord.Client):
         if message.content.startswith('..startgame'):
             self.ms.startGame(' '.join(message.content.split()[1:]))
             self.ms.clear(self.ms.firstMove)
+            print(self.ms.nicePrint(self.ms.numbersGrid))
             await message.channel.send(self.ms.showGrid())
         if message.content.startswith('..break'):
             await message.channel.send(self.ms.clear(message.content.split()[1]))

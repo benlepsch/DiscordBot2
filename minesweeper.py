@@ -65,6 +65,7 @@ class Minesweeper():
             #print(x)
             self.originalGrid[y][x] = 1
             self.incSurrounding(self.numbersGrid, y, x)
+        self.nicePrint(self.numbersGrid)
 
 
 

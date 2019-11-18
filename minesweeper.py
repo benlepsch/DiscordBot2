@@ -168,6 +168,10 @@ class Minesweeper():
 
     def showGrid(self):
         out = '```Flags left: ' + str(self.flagsLeft) + '\n'
+        out += '   '
+        for i in range(len(self.grid[0])):
+            out += chr(i + 65) + ' '
+        out += '\n'
         for i in range(len(self.grid)):
             out += str(i+1) + ' '*(3-len(str(i+1))) # 2 spaces for single digit numbers, 1 for two digit numbers
             for j in range(len(self.grid[0])):
@@ -182,12 +186,8 @@ class Minesweeper():
                 else:
                     out += 'O '
             out += '\n'
-        
-        out += '   '
-        for i in range(len(self.grid[0])):
-            out += chr(i + 65) + ' '
         out += '```'
-        
+
         return out
     
     def nicePrint(self, arr):
@@ -228,7 +228,7 @@ class Minesweeper():
         self.running = False
 
 
-""" # Uncomment these lines for CLI minesweeper, comment them again if running thru discord bot
+ # Uncomment these lines for CLI minesweeper, comment them again if running thru discord bot
 ms = Minesweeper()
 
 ms.startGame(input('Enter height, width, bombs, and first move separated by spaces: '))
@@ -253,4 +253,4 @@ while running:
     if not ms.running:
         running = False
         break
-"""
+

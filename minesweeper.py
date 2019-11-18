@@ -17,13 +17,11 @@ class Minesweeper():
     def incSurrounding(self, arr, y, x):
         # increments the surrounding values of arr[y][x]
         for i in range(y-1, y+2):
-            if i < 0 or i >= len(self.numbersGrid):
-                continue
-            for j in range(x-1, x+2):
-                if j < 0 or j >= len(self.numbersGrid[0]):
-                    continue
-                if arr[i][j] != 'B':
-                    arr[i][j] += 1
+            if not (i < 0 or i >= len(self.numbersGrid)):
+                for j in range(x-1, x+2):
+                    if not (j < 0 or j >= len(self.numbersGrid[0])):
+                        if arr[i][j] != 'B':
+                            arr[i][j] += 1
     
     def convertMove(self, move):
         # move is 4C, needs to turn into [4,3]

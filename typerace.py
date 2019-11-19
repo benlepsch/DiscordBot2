@@ -48,7 +48,7 @@ class MyClient(discord.Client):
             self.raceStart = calendar.timegm(time.gmtime())
             await message.channel.send(self.convert(s))
 
-        if message.content = self.msg:
+        if message.content == self.msg:
             self.racing = False
             self.msg = ''
             t = calendar.timegm(time.gmtime()) - self.raceStart

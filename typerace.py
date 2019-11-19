@@ -17,7 +17,7 @@ class MyClient(discord.Client):
         for i in range(len(reg)):
             self.conv[reg[i]] = enc[i]
     
-    def convert(msg):
+    def convert(self, msg):
         msg = list(msg)
         out = ''
         for l in msg:
@@ -25,7 +25,7 @@ class MyClient(discord.Client):
         
         return out
     
-    def genMsg():
+    def genMsg(self):
         f = open('words_alpha.txt').read().split('\n')
         out = ''
         for i in range(random.randint(5,20)):

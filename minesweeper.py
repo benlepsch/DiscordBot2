@@ -85,7 +85,7 @@ class Minesweeper():
         self.firstMove = msg[3]
         self.flagsLeft = self.bombs
         self.generateGrid(self.convertMove(msg[3]))
-        self.nicePrint(self.numbersGrid)
+        #self.nicePrint(self.numbersGrid)
         #return(self.showGrid())
         # TODO: handle first move here since its different than the rest
 

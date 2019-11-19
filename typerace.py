@@ -39,8 +39,9 @@ class MyClient(discord.Client):
         
         if message.content.startswith('..typerace'):
             self.racing = True
+            s = self.genMsg()
             self.raceStart = calendar.timegm(time.gmtime())
-            await message.channel.send(self.convert(self.genMsg()))
+            await message.channel.send(self.convert(s))
 
         if message.content.startswith('..typerace'):
             self.racing = False

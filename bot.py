@@ -28,21 +28,8 @@ class MyClient(discord.Client):
                 await message.channel.send('no u suck')
         if message.content.startswith('..clear'):
             await message.channel.send('** **\n'*50)
-        sohning = False
-        sending = ''
-        for word in message.content.split():
-            if is_sohn_in_word(word.lower()) != 'not sohn':
-                sending += is_sohn_in_word(word.lower())
-                sending += '\n'
-                sohning = True
         
-        if sohning:
-            await message.channel.send(sending)
-
         for word in message.content.split():
-            if re.search('so', word.lower()) and is_sohn_in_word(word.lower()) == False:
-                await message.channel.send(sohn_top())
-                return
             if '~bruh' in word.lower():
                 await message.channel.send('b̶̧̙͔̪̩͙̖̩̺͔̣̭̈́̈́̌̅̀̉̑̾͑͆̕͠r̷̠̓ù̸̜̼̤̼͕̣̱̣̣̜̱͓̹̳̃̀̀̀̀͐̊̿̉̐̌͊͑͘ḣ̴̨̢͎̯̞̤̫͉͔̥͎̋͌͆͆̉̍̾͑̑͠͝ ̸̬̘͈̲͖̅̐̋̐̔̄͂̒̿͂͗͋̈́̿̕͜m̵̛̛̛̪̗͔̘̓͆̈̕o̷̢̖̝̬͉͌̋̊̋͐̄̍͘ͅm̸̨̩͍͇̮͇͙͙̥̥̈́͑̂̀͛͌̽̈̈́̎̏͠e̴͚̮̤̎̏̅̓͆̅̕n̴̛͇̟̦̳̤̥̜̮̮͆̒̀̎̀̈́̋̈́̃̿͋̚ͅt̷̛͍̲̼͆̅̃̏̍̑̀')
                 return

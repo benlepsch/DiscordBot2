@@ -14,14 +14,14 @@ class MyClient(discord.Client):
         enc = list('𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫 \'-𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡𝟘.,&')
         reg = list('abcdefghijklmnopqrstuvwxyz \'-1234567890.,&')
         self.conv = {}
-        for i in range(reg):
-            self.conf[reg[i]] = enc[i]
+        for i in range(len(reg)):
+            self.conv[reg[i]] = enc[i]
     
     def convert(msg):
         msg = list(msg)
         out = ''
         for l in msg:
-            out += conv[l]
+            out += self.conv[l]
         
         return out
     
@@ -45,3 +45,6 @@ class MyClient(discord.Client):
         if message.content.startswith('..typerace'):
             self.racing = False
             self.raceStart = 0
+
+client = MyClient()
+client.run(token)

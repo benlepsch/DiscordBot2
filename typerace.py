@@ -22,7 +22,10 @@ class MyClient(discord.Client):
         msg = list(msg)
         out = ''
         for l in msg:
-            out += self.conv[l]
+            try:
+                out += self.conv[l]
+            except KeyError:
+                out += l
         
         return out
     

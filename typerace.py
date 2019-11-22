@@ -31,7 +31,7 @@ class MyClient(discord.Client):
         # out = ''
         # for i in range(random.randint(5,20)):
         #     out += ' ' + random.choice(f)
-        f = random.choice(open('sentences.txt').read().split('\n'))
+        f = random.choice(open('sentences.txt').read().split('\n')).lower()
         self.msg = f[1:]
         return f[1:]
         

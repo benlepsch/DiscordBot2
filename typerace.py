@@ -27,12 +27,13 @@ class MyClient(discord.Client):
         return out
     
     def genMsg(self):
-        f = open('words_alpha.txt').read().split('\n')
-        out = ''
-        for i in range(random.randint(5,20)):
-            out += ' ' + random.choice(f)
-        self.msg = out[1:]
-        return out[1:]
+        # f = open('words_alpha.txt').read().split('\n')
+        # out = ''
+        # for i in range(random.randint(5,20)):
+        #     out += ' ' + random.choice(f)
+        f = random.choice(open('sentences.txt').read().split('\n'))
+        self.msg = f[1:]
+        return f[1:]
         
 
     async def on_message(self, message):

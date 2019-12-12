@@ -26,3 +26,6 @@ class MyClient(discord.Client):
                 await message.author.send('216.192.76.25')
         except:
             print('oopies we had a fucky wucky')
+
+client = MyClient()
+client.run(token)

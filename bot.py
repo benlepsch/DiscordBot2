@@ -1,5 +1,5 @@
 import subprocess, re
-
+import os
 import discord, asyncio
 import urllib.request
 
@@ -8,6 +8,8 @@ from global_functions import owner, makeStr, users_who_can_get_ip, get_sohn_conf
 
 spam_bot = subprocess.Popen(['python3','./spamcommands.py'])
 
+sohn_active = True if os.environ['SOHN'] == True else False
+print(os.environ['SOHN'])
 class MyClient(discord.Client):
     async def on_ready(self):
         print('logged in as')
@@ -28,7 +30,18 @@ class MyClient(discord.Client):
                 await message.channel.send('no u suck')
         if message.content.startswith('..clear'):
             await message.channel.send('** **\n'*50)
-        
+
+        if sohn_active:
+            sohning = False
+            sending = ''
+            for word in message.content.split():
+                if is_sohn_in_word(word.lower()) != 'not sohn':
+                    sending += is_sohn_in_word(word.lower())
+                    sending += '\n'
+                    sohning = True
+            if sohning:
+                await message.channel.send(sending)
+
         for word in message.content.split():
             if '~bruh' in word.lower():
                 await message.channel.send('b̶̧̙͔̪̩͙̖̩̺͔̣̭̈́̈́̌̅̀̉̑̾͑͆̕͠r̷̠̓ù̸̜̼̤̼͕̣̱̣̣̜̱͓̹̳̃̀̀̀̀͐̊̿̉̐̌͊͑͘ḣ̴̨̢͎̯̞̤̫͉͔̥͎̋͌͆͆̉̍̾͑̑͠͝ ̸̬̘͈̲͖̅̐̋̐̔̄͂̒̿͂͗͋̈́̿̕͜m̵̛̛̛̪̗͔̘̓͆̈̕o̷̢̖̝̬͉͌̋̊̋͐̄̍͘ͅm̸̨̩͍͇̮͇͙͙̥̥̈́͑̂̀͛͌̽̈̈́̎̏͠e̴͚̮̤̎̏̅̓͆̅̕n̴̛͇̟̦̳̤̥̜̮̮͆̒̀̎̀̈́̋̈́̃̿͋̚ͅt̷̛͍̲̼͆̅̃̏̍̑̀')
